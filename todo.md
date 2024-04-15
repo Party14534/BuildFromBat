@@ -1,1 +1,4 @@
-- [ ] Add Name changer
+- [X] Add Name changer
+- [X] Add global project.json support
+- [X] Fix fix windows bat line closing
+- [ ] Add tests

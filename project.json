@@ -1,8 +1,5 @@
 {
-  "compiler": "gcc",
-  "flags": [
-    "sanitize=address"
-  ],
+  "compiler": "g++",
   "libraries": [
     "sfml-system",
     "sfml-window",
@@ -11,6 +8,8 @@
   "excludes": [
     "test",
     "build",
-    "compileinfo.json"
-  ]
+    "compileinfo.json",
+    ".git"
+  ],
+  "extension": ".sh"
 }

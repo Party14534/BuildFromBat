@@ -1,10 +1,11 @@
 package createbat
 
 import (
-	"fmt"
 	"buildFromBat/filesystem"
 	"buildFromBat/process-json"
+	"fmt"
 	"os"
+	"strings"
 )
 
 func addAllFiles(contents *string, dir *filesystem.Directory) {
@@ -28,6 +29,12 @@ info *processjson.CompileInfo, name string) {
             os.Exit(1)
         }
     }
+    
+    // Change the end line character based on the file extension
+    endLineChar := "^"
+    if strings.Compare(info.Extension, ".sh") == 0 {
+        endLineChar = "\\"
+    }
 
     // String to hold the text before writing
     var contents string
@@ -39,7 +46,7 @@ info *processjson.CompileInfo, name string) {
     for _, flag := range info.Flags {
         contents += "-f" + flag + " "
     }
-    contents += "\\\n"
+    contents += endLineChar + "\n"
     
     // Add the include directores from the json
     for _, iDir := range info.IncludeDirectories {
@@ -48,7 +55,7 @@ info *processjson.CompileInfo, name string) {
 
     // If there were any include directories start a new line
     if len(info.IncludeDirectories) > 0 { 
-        contents += "\\\n" 
+        contents += endLineChar + "\n" 
     }
     
     // Add the library directories
@@ -58,7 +65,7 @@ info *processjson.CompileInfo, name string) {
 
     // If there were any library directories start a new line
     if len(info.LibraryDirectories) > 0 { 
-        contents += " \\\n" 
+        contents += " " + endLineChar + "\n" 
     }
     
     // Add all the file paths to the string
