@@ -6,7 +6,7 @@ import (
     "path"
     "path/filepath"
     "strings"
-    "buildFromBat/process-json"
+    "BuildFromBat/process-json"
 )
 
 type Directory struct {

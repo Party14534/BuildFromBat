@@ -1,8 +1,8 @@
 package createbat
 
 import (
-	"buildFromBat/filesystem"
-	"buildFromBat/process-json"
+	"BuildFromBat/filesystem"
+	"BuildFromBat/process-json"
 	"fmt"
 	"os"
 	"strings"

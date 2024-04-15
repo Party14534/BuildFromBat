@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"buildFromBat/create-bat"
-	"buildFromBat/filesystem"
-	"buildFromBat/process-json"
+	"BuildFromBat/create-bat"
+	"BuildFromBat/filesystem"
+	"BuildFromBat/process-json"
 	"os"
 	"runtime"
 	"strings"
