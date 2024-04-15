@@ -47,7 +47,7 @@ Every key except Compiler and Extension accept multiple occurrences in the `proj
 - **libraryDirectory:** Specifies directories containing project libraries. Example: libraryDirectory=C:\path\to\folder\lib
 - **library:** Identifies libraries utilized by the compiler during the build. Example: library=Gl
 - **exclude:** Identifies directories or files that should not be added to the build file. Example: exclude=build
-- **Extension:** If this value is not set the program will choose the correct extension based on the user's operating system, however not all operating systems are currently supported.
+- **extension:** If this value is not set the program will choose the correct extension based on the user's operating system, however not all operating systems are currently supported.
 
 ## Compiler Compatibility
 BuildFromBat has primarily been tested and designed for use with the `g++` compiler. While it offers flexibility and ease of use specifically tailored for `g++`, it may not seamlessly function with other compilers out of the box.
