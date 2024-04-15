@@ -1,0 +1,16 @@
+{
+  "compiler": "gcc",
+  "flags": [
+    "sanitize=address"
+  ],
+  "libraries": [
+    "sfml-system",
+    "sfml-window",
+    "sfml-graphics"
+  ],
+  "excludes": [
+    "test",
+    "build",
+    "compileinfo.json"
+  ]
+}
