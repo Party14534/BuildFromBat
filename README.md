@@ -1,15 +1,15 @@
 # Build From Bat
 
 ## Description
-This program simplifies the creation of build scripts for C++ projects, streamlining the development process.
+BuildFromBat simplifies the creation of build scripts for C++ projects, streamlining the development process.
 
 BuildFromBat manages the discovery and manipulation of directories and files required for the build process which enhances the efficiency of the project setup and execution, contributing to a more streamlined workflow for C++ development.
 
 ## How to install
 1. Ensure the latest version of Golang is installed
     - Golang can be installed from Go's official [website](https://go.dev/doc/install)
-2. Clone the repo in whichever way you please 
-3. In your terminal move into BuildFromBat's directory
+2. Clone the project repo 
+3. Open the terminal in BuildFromBat's directory
 4. Build the project using the go build command
 ```console
 go build
@@ -19,13 +19,13 @@ go build
 go install
 ```
 7. The program is now successfully installed, the BuildFromBat command should now be able to be used anywhere on your system!
-    - If the program doesn't run from the BuildFromBat command ensure that the go/bin folder is in your systems PATH
+    - If the program doesn't run from the BuildFromBat command ensure that the "go/bin" folder is in your systems PATH
 
 ## How to use
 - **Run from Project's Root Directory:** Execute this tool from the highest-level directory of your project, the root directory.
-- **Prepare 'project.txt':** Ensure there's a 'project.json' file within the directory. This file should detail essential information like compiler flags, required libraries, and other configurations necessary for your project's successful build.
-  - *Note*: If 'project.json' isn't found in the execution directory, the tool will search for it in the '~/.config/BuildFromBat' directory.
-- **Automated Build Setup:** BuildFromBat simplifies the process by creating a 'build' folder in the current directory if it doesn't exist already. It generates a .bat/.sh file within this folder. The resulting .bat/.sh file compiles the executable and places it into the 'build' folder for convenient access.
+- **Prepare `project.json`:** Ensure there's a `project.json` file within the directory. This file should detail essential information like compiler flags, required libraries, and other configurations necessary for your project's successful build.
+  - *Note*: If 'project.json' isn't found in the execution directory, the tool will search for the global `project.json` in the '~/.config/BuildFromBat' directory.
+- **Automated Build Setup:** BuildFromBat simplifies the process by creating a 'build' folder in the current directory if it doesn't exist already. It generates a .bat/.sh file within this folder. The resulting .bat/.sh file compiles the project into an executable with the desired name.
 
 ## Arguments
 The program requires a single argument: the desired name for the output file.
