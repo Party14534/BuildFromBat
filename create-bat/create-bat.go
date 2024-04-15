@@ -72,7 +72,7 @@ info *processjson.CompileInfo, name string) {
     addAllFiles(&contents, parent)
 
     // Add the -o flag and name of the program
-    contents += "-o build/" + name + " "
+    contents += "-o " + name + " "
     
     // Add the libraries to the end of the build script
     for _, lib := range info.Libraries {

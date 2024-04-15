@@ -1,2 +1,2 @@
-gcc -fsanitize=address \
--o build/test -lsfml-system -lsfml-window -lsfml-graphics 
+g++ \
+-o test -lsfml-system -lsfml-window -lsfml-graphics 

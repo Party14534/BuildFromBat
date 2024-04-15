@@ -28,7 +28,7 @@ func ProcessJson() CompileInfo {
         usr, _ := user.Current()
         homeDir := usr.HomeDir
         
-        jsonFile, err = os.Open(homeDir + "/.config/buildFromBat/project.json")
+        jsonFile, err = os.Open(homeDir + "/.config/BuildFromBat/project.json")
         if err != nil {
             fmt.Println("Unable to open project.json file: ", err)
             os.Exit(1)
