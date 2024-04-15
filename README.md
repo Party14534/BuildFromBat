@@ -42,12 +42,14 @@ BuildFromBat uses the json provided by the user to fill out the info necessary t
 Every key except Compiler and Extension accept multiple occurrences in the `project.txt` file:
 
 - **compiler:** Specifies the compiler invoked by the build process.
-- **flag:** Indicates additional compiler flags required for the build.
-- **includeDirectory:** Denotes the project's include directories.
-- **libraryDirectory:** Specifies directories containing project libraries.
-- **library:** Identifies libraries utilized by the compiler during the build.
-- **exclude:** Identifies directories or files that should not be added to the build file.
+- **flags:** Indicates additional compiler flags required for the build.
+- **includeDirectories:** Denotes the project's include directories.
+- **libraryDirectories:** Specifies directories containing project libraries.
+- **libraries:** Identifies libraries utilized by the compiler during the build.
+- **excludes:** Identifies directories or files that should not be added to the build file.
 - **extension:** If this value is not set the program will choose the correct extension based on the user's operating system, however not all operating systems are currently supported.
+
+There is an example `project.json` file in this repo that you can build off of.
 
 ## Compiler Compatibility
 Currently BuildFromBat only officially supports the `g++` compiler, however future updates will add functionality with other compilers.

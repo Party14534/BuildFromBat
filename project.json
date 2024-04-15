@@ -1,5 +1,14 @@
 {
   "compiler": "g++",
+  "flags": [
+      "Wall"
+  ],
+  "includeDirectories": [
+      "path/to/dir/include"
+  ],
+  "libraryDirectories": [
+      "path/to/dir/lib"
+  ],
   "libraries": [
     "sfml-system",
     "sfml-window",
@@ -8,7 +17,6 @@
   "excludes": [
     "test",
     "build",
-    "compileinfo.json",
     ".git"
   ],
   "extension": ".sh"

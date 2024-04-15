@@ -44,7 +44,7 @@ info *processjson.CompileInfo, name string) {
     
     // Add the flags from the json
     for _, flag := range info.Flags {
-        contents += "-f" + flag + " "
+        contents += "-" + flag + " "
     }
     contents += endLineChar + "\n"
     
