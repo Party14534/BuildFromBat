@@ -46,7 +46,7 @@ Every key except Compiler and Extension accept multiple occurrences in the `proj
 - **includeDirectories:** Denotes the project's include directories.
 - **libraryDirectories:** Specifies directories containing project libraries.
 - **libraries:** Identifies libraries utilized by the compiler during the build.
-- **excludes:** Identifies directories or files that should not be added to the build file.
+- **excludes:** Identifies directories or files that should not be added to the build file. The exclude strings are interpreted as regex.
 - **extension:** If this value is not set the program will choose the correct extension based on the user's operating system, however not all operating systems are currently supported.
 
 There is an example `project.json` file in this repo that you can build off of.
