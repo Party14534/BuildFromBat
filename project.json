@@ -17,7 +17,8 @@
   "excludes": [
     "test",
     "build",
-    ".git"
+    ".git",
+    "*.hpp"
   ],
   "extension": ".sh"
 }

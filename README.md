@@ -57,7 +57,7 @@ Currently BuildFromBat only officially supports the `g++` compiler, however futu
 ## TODO
 I plan to continuously improve and expand this project to improve my skills as a programmer. Planned updates include:
 
-- **Regex support:** A future update will make the 'excludes' target files via regex to allow for more freedom in compiling projects.
+- ~**Regex support:** A future update will make the 'excludes' target files via regex to allow for more freedom in compiling projects.~
 
 - **Custom Include Paths:** Upcoming updates will introduce the capability to include paths that BuildFromBat will also scan to add files to the build script.
     - **Intended Use:** This feature aims to facilitate the inclusion of directories within your primary project. It will assist in scenarios where separate executable compilations within the project require files from sibling directories for compilation.

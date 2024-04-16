@@ -1,12 +1,13 @@
 package filesystem
 
 import (
-    "fmt"
-    "os"
-    "path"
-    "path/filepath"
-    "strings"
-    "BuildFromBat/process-json"
+	"BuildFromBat/process-json"
+	"fmt"
+	"os"
+	"path"
+	"path/filepath"
+	"regexp"
+	"strings"
 )
 
 type Directory struct {
@@ -57,8 +58,15 @@ func NewDirectory(dirPath string, info *processjson.CompileInfo) Directory {
         // If the file or directory being added is in the exclude list, do not include them
         isExclude := false
         for _, exclude := range info.Excludes {
-            if strings.Compare(exclude, entry.Name()) == 0 {
+            r, err := regexp.Compile(`^` + exclude + `$`)
+            if err != nil {
+                fmt.Println("The following exclude is not a valid regex: ", exclude)
+                os.Exit(1)
+            }
+
+            if r.MatchString(entry.Name()) {
                 isExclude = true
+                break
             } 
         }
         if isExclude { continue }
