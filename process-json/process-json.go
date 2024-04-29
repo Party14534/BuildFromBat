@@ -18,7 +18,7 @@ type CompileInfo struct {
     Extension string
 }
 
-func ProcessJson() CompileInfo {
+func ProcessJson(use_global_json bool) (CompileInfo, error) {
     var info CompileInfo
     
     // Open the project json or the global
@@ -29,9 +29,9 @@ func ProcessJson() CompileInfo {
         homeDir := usr.HomeDir
         
         jsonFile, err = os.Open(homeDir + "/.config/BuildFromBat/project.json")
-        if err != nil {
-            fmt.Println("Unable to open project.json file: ", err)
-            os.Exit(1)
+        if err != nil || !use_global_json {
+            error := fmt.Errorf("Unable to open project.json file: %v\n", err)
+            return info, error
         }
 
         fmt.Println("Successfully used global project.json")
@@ -42,16 +42,16 @@ func ProcessJson() CompileInfo {
     jsonBytes, err := io.ReadAll(jsonFile)
 
     if err != nil { 
-        fmt.Println("Error while converting to byte array") 
-        os.Exit(1)
+        error := fmt.Errorf("Error while converting to byte array: %v\n", err) 
+        return info, error
     }
 
     err = json.Unmarshal(jsonBytes, &info)
 
     if err != nil {
-        fmt.Println("Error while decoding json: \n", err)
-        os.Exit(1)
+        error := fmt.Errorf("Error while decoding json: %v\n", err)
+        return info, error
     } 
 
-    return info
+    return info, nil
 }

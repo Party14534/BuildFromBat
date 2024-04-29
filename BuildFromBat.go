@@ -18,7 +18,10 @@ func main() {
         os.Exit(1)
     }
 
-    info := processjson.ProcessJson()
+    info, err := processjson.ProcessJson(true)
+    if err != nil {
+        os.Exit(1)
+    }
     
     // Set extension variable if not set by user
     userOs := runtime.GOOS

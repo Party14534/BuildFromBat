@@ -5,15 +5,14 @@ import (
 	"BuildFromBat/process-json"
 	"fmt"
 	"os"
-	"strings"
 )
 
-func addAllFiles(contents *string, dir *filesystem.Directory) {
+func addAllFiles(contents *string, endLineChar string, dir *filesystem.Directory) {
     for _, file := range dir.Files {
-        *contents += file + " \\\n"
+        *contents += file + " " + endLineChar + "\n"
     }
     for _, subDirs := range dir.Directories {
-        addAllFiles(contents, &subDirs)
+        addAllFiles(contents, endLineChar, &subDirs)
     }
 }
 
@@ -32,7 +31,7 @@ info *processjson.CompileInfo, name string) {
     
     // Change the end line character based on the file extension
     endLineChar := "^"
-    if strings.Compare(info.Extension, ".sh") == 0 {
+    if info.Extension == ".sh" {
         endLineChar = "\\"
     }
 
@@ -65,11 +64,11 @@ info *processjson.CompileInfo, name string) {
 
     // If there were any library directories start a new line
     if len(info.LibraryDirectories) > 0 { 
-        contents += " " + endLineChar + "\n" 
+        contents += endLineChar + "\n" 
     }
     
     // Add all the file paths to the string
-    addAllFiles(&contents, parent)
+    addAllFiles(&contents, endLineChar, parent)
 
     // Add the -o flag and name of the program
     contents += "-o " + name + " "

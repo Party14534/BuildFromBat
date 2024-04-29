@@ -40,7 +40,7 @@ func TestJsonProcessing(t *testing.T) {
         }
 
 
-        got, err := processjson.ProcessJson() 
+        got, err := processjson.ProcessJson(true) 
         if err != nil {
             t.Errorf("Error was thrown when processing json")
             return
@@ -74,29 +74,45 @@ func TestJsonProcessing(t *testing.T) {
              return
          }
 
-        _, err := processjson.ProcessJson() 
+        _, err := processjson.ProcessJson(true) 
 
         if err == nil {
             t.Errorf("Sent a bad json file and no error was thrown")
         }
     })
     t.Run("Invalid json fuzzing", func(t * testing.T) { 
-        
-        contents := "{"
-        for i := 0; i < rand.Int() % 1000; i++ {
-            contents += string('A' + rune(rand.Intn(60)))
-        }
+        // Run fuzzer 50 times
+        for range 50 { 
+            contents := "}"
+            for i := 0; i < rand.Int() % 1000; i++ {
+                contents += string('A' + rune(rand.Intn(60)))
+            }
 
-         error := os.WriteFile("project.json", []byte(contents), 0644)
-         if error != nil {
-             t.Errorf("Failed to write to project.json")
-             return
-         }
+            error := os.WriteFile("project.json", []byte(contents), 0644)
+            if error != nil {
+                t.Errorf("Failed to write to project.json")
+                return
+            }
 
-        _, err := processjson.ProcessJson() 
+            _, err := processjson.ProcessJson(true) 
 
-        if err == nil {
-            t.Errorf("Sent a bad json file and no error was thrown")
+            if err == nil {
+                t.Errorf("Sent a bad json file and no error was thrown")
+            }
         }
     })
+
+    t.Run("No Project Json", func(t * testing.T) { 
+        err := os.Remove("project.json")
+        if err != nil {
+            t.Errorf("Error deleting project.json")
+            return
+        }
+
+        _, err = processjson.ProcessJson(false) 
+        if err == nil {
+            t.Errorf("No project.json found but no error thrown")
+        }
+    })
+
 }

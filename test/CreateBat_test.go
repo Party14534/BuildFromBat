@@ -5,7 +5,8 @@ import (
 	"BuildFromBat/filesystem"
 	processjson "BuildFromBat/process-json"
 	"os"
-	"reflect"
+	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -13,6 +14,10 @@ func TestCompilerChanges(t *testing.T) {
     t.Run("Ensure bat file compiles with g++", func(t *testing.T) {
         project_info := processjson.CompileInfo {
             Compiler: "g++",
+            Flags: []string{"Wall"},
+            Libraries: []string{"Gl"},
+            LibraryDirectories: []string{"path/to/lib"},
+            IncludeDirectories: []string{"path/to/include"},
             Excludes: []string{"hidden"},
             Extension: ".sh",
         }
@@ -21,19 +26,30 @@ func TestCompilerChanges(t *testing.T) {
 
         createbat.WriteBat(&parent, &project_info, "test_bat")
 
-        got, err := os.ReadFile("build/build.sh")
+        got_slice, err := os.ReadFile("build/build.sh")
         if err != nil {
             t.Errorf("Bat file was not created")
             return
         }
 
-        expected_string := `g++
-file1.cpp
-file2.hpp
--o test_bat`
-        expected := []byte(expected_string)
+        got := string(got_slice)
 
-        if reflect.DeepEqual(got, expected) {
+        base_filepath, err := filepath.Abs(".")
+        if err != nil {
+            t.Errorf("Unable to get absolute filepath")
+            return
+        }
+
+        file1 := base_filepath + "/test_dir/file1.cpp"
+        file2 := base_filepath + "/test_dir/file2.hpp"
+
+        expected := `g++ -Wall \
+-I"path/to/include" \
+-L"path/to/lib" \
+` + file2 + " \\\n" + file1 + " \\" + `
+-o test_bat -lGl`
+
+        if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)
         }
         
@@ -50,19 +66,28 @@ file2.hpp
 
         createbat.WriteBat(&parent, &project_info, "test_bat")
 
-        got, err := os.ReadFile("build/build.sh")
+        got_slice, err := os.ReadFile("build/build.sh")
         if err != nil {
             t.Errorf("Bat file was not created")
             return
         }
 
-        expected_string := `gcc
-file1.cpp
-file2.hpp
--o test_bat`
-        expected := []byte(expected_string)
+        got := string(got_slice)
 
-        if reflect.DeepEqual(got, expected) {
+        base_filepath, err := filepath.Abs(".")
+        if err != nil {
+            t.Errorf("Unable to get absolute filepath")
+            return
+        }
+
+        file1 := base_filepath + "/test_dir/file1.cpp"
+        file2 := base_filepath + "/test_dir/file2.hpp"
+
+        expected := `gcc \
+` + file2 + " \\\n" + file1 + " \\" + `
+-o test_bat`
+
+        if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)
         }
         
@@ -81,25 +106,33 @@ func TestExtensionChanges(t *testing.T) {
 
         createbat.WriteBat(&parent, &project_info, "test_bat")
 
-        got, err := os.ReadFile("build/build.sh")
+        got_slice, err := os.ReadFile("build/build.sh")
         if err != nil {
             t.Errorf("Bat file was not created")
             return
         }
 
-        expected_string := `g++
-file1.cpp
-file2.hpp
--o test_bat`
-        expected := []byte(expected_string)
+        got := string(got_slice)
 
-        if reflect.DeepEqual(got, expected) {
+        base_filepath, err := filepath.Abs(".")
+        if err != nil {
+            t.Errorf("Unable to get absolute filepath")
+            return
+        }
+
+        file1 := base_filepath + "/test_dir/file1.cpp"
+        file2 := base_filepath + "/test_dir/file2.hpp"
+
+        expected := `g++ \
+` + file2 + " \\\n" + file1 + ` \
+-o test_bat`
+
+        if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)
         }
-        
     })
 
-        t.Run("Ensure bat file works with .bat extension", func(t *testing.T) {
+    t.Run("Ensure bat file works with .bat extension", func(t *testing.T) {
         project_info := processjson.CompileInfo {
             Compiler: "g++",
             Excludes: []string{"hidden"},
@@ -110,19 +143,28 @@ file2.hpp
 
         createbat.WriteBat(&parent, &project_info, "test_bat")
 
-        got, err := os.ReadFile("build/build.bat")
+        got_slice, err := os.ReadFile("build/build.bat")
         if err != nil {
             t.Errorf("Bat file was not created")
             return
         }
 
-        expected_string := `g++ ^
-file1.cpp ^
-file2.hpp ^
--o test_bat`
-        expected := []byte(expected_string)
+        got := string(got_slice)
 
-        if reflect.DeepEqual(got, expected) {
+        base_filepath, err := filepath.Abs(".")
+        if err != nil {
+            t.Errorf("Unable to get absolute filepath")
+            return
+        }
+
+        file1 := base_filepath + "/test_dir/file1.cpp"
+        file2 := base_filepath + "/test_dir/file2.hpp"
+
+        expected := `g++ ^
+` + file2 + " ^\n" + file1 + ` ^
+-o test_bat`
+
+        if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)
         }
         

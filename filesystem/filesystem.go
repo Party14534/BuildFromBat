@@ -16,6 +16,21 @@ type Directory struct {
     Files []string
 }
 
+func (d Directory) DirectoryToString (str *string, offset int) {
+    var tabs string = ""
+    for i := 0; i < offset; i++ {
+        tabs += "  "
+    }
+
+    for _, dir := range d.Directories {
+        (*str) += tabs + "- " + filepath.Base(dir.Directory.Name()) + "\n"
+        dir.DirectoryToString(str, offset + 1)
+    }
+    for _,file := range d.Files {
+        (*str) += tabs + "* " + filepath.Base(file) + "\n"
+    }
+}
+
 func (d Directory) PrintDirectory (offset int) {
     var tabs string = ""
     for i := 0; i < offset; i++ {
