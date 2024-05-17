@@ -20,5 +20,6 @@
     ".git",
     "*.hpp"
   ],
-  "extension": ".sh"
+  "extension": ".sh",
+  "name": "template"
 }

@@ -28,10 +28,16 @@ go install
 - **Automated Build Setup:** BuildFromBat simplifies the process by creating a 'build' folder in the current directory if it doesn't exist already. It generates a .bat/.sh file within this folder. The resulting .bat/.sh file compiles the project into an executable with the desired name.
 
 ## Arguments
-The program requires a single argument: the desired name for the output file.
+The program requires no arguments and can be run by simply calling its name
 
 ```console
 BuildFromBat
+```
+
+If you wish to create a sample `project.json` in your current folder you can run:
+
+```console
+BuildFromBat -t
 ```
 
 ## `project.json` format
@@ -60,7 +66,7 @@ I plan to continuously improve and expand this project to improve my skills as a
 
 - ~**Change naming system:** Changed the way names were set to remove need for command line argument~
 
-- **Create default JSON:** I plan to add a feature into the program that, when ran, will create an empty project.json for the user to modify.
+- ~**Create default JSON:** I plan to add a feature into the program that, when ran, will create an empty project.json for the user to modify.~
 
 - **Custom Include Paths:** Upcoming updates will introduce the capability to include paths that BuildFromBat will also scan to add files to the build script.
     - **Intended Use:** This feature aims to facilitate the inclusion of directories within your primary project. It will assist in scenarios where separate executable compilations within the project require files from sibling directories for compilation.

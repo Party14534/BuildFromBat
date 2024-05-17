@@ -54,6 +54,7 @@ func TestJsonProcessing(t *testing.T) {
             Libraries: []string{"Gl", "sfml-window"},
             Excludes: []string{"Test*"},
             Extension: ".sh",
+            Name: "app",
         }
 
         if !reflect.DeepEqual(got, expected) {

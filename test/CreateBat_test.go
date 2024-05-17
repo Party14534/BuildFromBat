@@ -20,11 +20,12 @@ func TestCompilerChanges(t *testing.T) {
             IncludeDirectories: []string{"path/to/include"},
             Excludes: []string{"hidden"},
             Extension: ".sh",
+            Name: "app",
         }
         
         parent := filesystem.NewDirectory(".", &project_info)
 
-        createbat.WriteBat(&parent, &project_info, "test_bat")
+        createbat.WriteBat(&parent, &project_info)
 
         got_slice, err := os.ReadFile("build/build.sh")
         if err != nil {
@@ -47,7 +48,7 @@ func TestCompilerChanges(t *testing.T) {
 -I"path/to/include" \
 -L"path/to/lib" \
 ` + file2 + " \\\n" + file1 + " \\" + `
--o test_bat -lGl`
+-o app -lGl`
 
         if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)
@@ -60,11 +61,12 @@ func TestCompilerChanges(t *testing.T) {
             Compiler: "gcc",
             Excludes: []string{"hidden"},
             Extension: ".sh",
+            Name: "app",
         }
         
         parent := filesystem.NewDirectory(".", &project_info)
 
-        createbat.WriteBat(&parent, &project_info, "test_bat")
+        createbat.WriteBat(&parent, &project_info)
 
         got_slice, err := os.ReadFile("build/build.sh")
         if err != nil {
@@ -85,7 +87,7 @@ func TestCompilerChanges(t *testing.T) {
 
         expected := `gcc \
 ` + file2 + " \\\n" + file1 + " \\" + `
--o test_bat`
+-o app`
 
         if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)
@@ -100,11 +102,12 @@ func TestExtensionChanges(t *testing.T) {
             Compiler: "g++",
             Excludes: []string{"hidden"},
             Extension: ".sh",
+            Name: "app",
         }
         
         parent := filesystem.NewDirectory(".", &project_info)
 
-        createbat.WriteBat(&parent, &project_info, "test_bat")
+        createbat.WriteBat(&parent, &project_info)
 
         got_slice, err := os.ReadFile("build/build.sh")
         if err != nil {
@@ -125,7 +128,7 @@ func TestExtensionChanges(t *testing.T) {
 
         expected := `g++ \
 ` + file2 + " \\\n" + file1 + ` \
--o test_bat`
+-o app`
 
         if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)
@@ -137,11 +140,12 @@ func TestExtensionChanges(t *testing.T) {
             Compiler: "g++",
             Excludes: []string{"hidden"},
             Extension: ".bat",
+            Name: "app",        
         }
         
         parent := filesystem.NewDirectory(".", &project_info)
 
-        createbat.WriteBat(&parent, &project_info, "test_bat")
+        createbat.WriteBat(&parent, &project_info)
 
         got_slice, err := os.ReadFile("build/build.bat")
         if err != nil {
@@ -162,7 +166,7 @@ func TestExtensionChanges(t *testing.T) {
 
         expected := `g++ ^
 ` + file2 + " ^\n" + file1 + ` ^
--o test_bat`
+-o app`
 
         if strings.TrimSpace(got) != strings.TrimSpace(expected) {
             t.Errorf("Expected %v but got %v\n", expected, got)

@@ -1,22 +1,31 @@
 package main
 
 import (
-	"fmt"
 	"BuildFromBat/create-bat"
+	createtemplate "BuildFromBat/create-template"
 	"BuildFromBat/filesystem"
 	"BuildFromBat/process-json"
+	"fmt"
 	"os"
+	"reflect"
 	"runtime"
 	"strings"
 )
 
 func main() {
-    /*args := os.Args[1:]
+    args := os.Args[1:]
     
-    if len(args) != 1 {
-        fmt.Println("Input the name of the output file as a command-line argument")
-        os.Exit(1)
-    }*/
+    if len(args) == 1 {
+        if reflect.DeepEqual(args[0], "-t") {
+            fmt.Println("Creating process.json template")
+            createtemplate.CreateTemplate()
+        } else {
+            fmt.Println("Invalid argument")
+            os.Exit(1)
+        }
+        
+        return
+    }
 
     info, err := processjson.ProcessJson(true)
     if err != nil {
