@@ -16,6 +16,7 @@ type CompileInfo struct {
     Libraries []string
     Excludes []string
     Extension string
+    Name string
 }
 
 func ProcessJson(use_global_json bool) (CompileInfo, error) {
@@ -51,6 +52,10 @@ func ProcessJson(use_global_json bool) (CompileInfo, error) {
     if err != nil {
         error := fmt.Errorf("Error while decoding json: %v\n", err)
         return info, error
+    } 
+    
+    if info.Name == "" {
+        info.Name = "app";
     } 
 
     return info, nil

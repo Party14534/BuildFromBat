@@ -16,8 +16,7 @@ func addAllFiles(contents *string, endLineChar string, dir *filesystem.Directory
     }
 }
 
-func WriteBat(parent *filesystem.Directory, 
-info *processjson.CompileInfo, name string) {
+func WriteBat(parent *filesystem.Directory, info *processjson.CompileInfo) {
     // If the build folder does not exist we create it
     _, err := os.Stat(parent.Directory.Name() + "/build")
 
@@ -71,7 +70,7 @@ info *processjson.CompileInfo, name string) {
     addAllFiles(&contents, endLineChar, parent)
 
     // Add the -o flag and name of the program
-    contents += "-o " + name + " "
+    contents += "-o " + info.Name + " "
     
     // Add the libraries to the end of the build script
     for _, lib := range info.Libraries {

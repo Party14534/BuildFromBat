@@ -31,10 +31,8 @@ go install
 The program requires a single argument: the desired name for the output file.
 
 ```console
-BuildFromBat [application_name]
+BuildFromBat
 ```
-
-Replace `[application_name]` with your preferred name for the application file the build script will create.
 
 ## `project.json` format
 BuildFromBat uses the json provided by the user to fill out the info necessary to compile the project 
@@ -48,6 +46,7 @@ Every key except Compiler and Extension accept multiple occurrences in the `proj
 - **libraries:** Identifies libraries utilized by the compiler during the build.
 - **excludes:** Identifies directories or files that should not be added to the build file. The exclude strings are interpreted as regex.
 - **extension:** If this value is not set the program will choose the correct extension based on the user's operating system, however not all operating systems are currently supported.
+- **name:** If this value is not set the program will set the name of the program to 'app'.
 
 There is an example `project.json` file in this repo that you can build off of.
 
@@ -58,6 +57,10 @@ Currently BuildFromBat only officially supports the `g++` compiler, however futu
 I plan to continuously improve and expand this project to improve my skills as a programmer. Planned updates include:
 
 - ~**Regex support:** A future update will make the 'excludes' target files via regex to allow for more freedom in compiling projects.~
+
+- ~**Change naming system:** Changed the way names were set to remove need for command line argument~
+
+- **Create default JSON:** I plan to add a feature into the program that, when ran, will create an empty project.json for the user to modify.
 
 - **Custom Include Paths:** Upcoming updates will introduce the capability to include paths that BuildFromBat will also scan to add files to the build script.
     - **Intended Use:** This feature aims to facilitate the inclusion of directories within your primary project. It will assist in scenarios where separate executable compilations within the project require files from sibling directories for compilation.

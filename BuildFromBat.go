@@ -11,12 +11,12 @@ import (
 )
 
 func main() {
-    args := os.Args[1:]
+    /*args := os.Args[1:]
     
     if len(args) != 1 {
         fmt.Println("Input the name of the output file as a command-line argument")
         os.Exit(1)
-    }
+    }*/
 
     info, err := processjson.ProcessJson(true)
     if err != nil {
@@ -39,5 +39,5 @@ func main() {
     parent := filesystem.NewDirectory(".", &info)
     parent.PrintDirectory(0)
 
-    createbat.WriteBat(&parent, &info, args[0])
+    createbat.WriteBat(&parent, &info)
 }
