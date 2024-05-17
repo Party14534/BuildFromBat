@@ -66,7 +66,7 @@ I plan to continuously improve and expand this project to improve my skills as a
 
 - ~**Change naming system:** Changed the way names were set to remove need for command line argument~
 
-- ~**Create default JSON:** I plan to add a feature into the program that, when ran, will create an empty project.json for the user to modify.~
+- ~**Create sample JSON:** I plan to add a feature into the program that, when ran, will create an empty project.json for the user to modify.~
 
 - **Custom Include Paths:** Upcoming updates will introduce the capability to include paths that BuildFromBat will also scan to add files to the build script.
     - **Intended Use:** This feature aims to facilitate the inclusion of directories within your primary project. It will assist in scenarios where separate executable compilations within the project require files from sibling directories for compilation.
