@@ -95,7 +95,8 @@ func NewDirectory(dirPath string, info *processjson.CompileInfo) Directory {
                 NewDirectory(absoultePath, info), 
             )
         } else if strings.Compare(ext, ".cpp") == 0  ||
-        strings.Compare(ext, ".hpp") == 0 {
+        strings.Compare(ext, ".hpp") == 0 || strings.Compare(ext, ".tpp") == 0 || 
+        strings.Compare(ext, ".c") == 0 {
             parent.Files = append(parent.Files, absoultePath)
         }
     }
